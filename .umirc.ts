@@ -7,7 +7,7 @@ export default defineConfig({
   initialState: {},
   request: {},
   layout: {
-    title: '@umijs/max',
+    title: '好室友™平台',
   },
   routes: [
     {
@@ -15,9 +15,19 @@ export default defineConfig({
       redirect: '/home',
     },
     {
-      name: '首页',
+      name: 'Search',
       path: '/home',
       component: './Home',
+      // 不展示顶栏
+      headerRender: false,
+      // 不展示页脚
+      footerRender: false,
+      // 不展示菜单
+      menuRender: false,
+      // 不展示菜单顶栏
+      menuHeaderRender: false,
+      // 在面包屑中隐藏
+      hideInBreadcrumb: true,
     },
     {
       name: '权限演示',
