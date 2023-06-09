@@ -14,7 +14,8 @@
     "@ant-design/icons": "^5.1.2",
     "@ant-design/pro-components": "^2.4.16",
     "@umijs/max": "^4.0.69",
-    "antd": "^5.5.1"
+    "antd": "^5.5.1",
+    "google-map-react": "^2.2.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.7",
