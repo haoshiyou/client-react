@@ -16,8 +16,17 @@ dependencies:
   google-map-react:
     specifier: ^2.2.1
     version: registry.npmjs.org/google-map-react@2.2.1(react-dom@17.0.2)(react@17.0.2)
+  lodash:
+    specifier: ^4.17.21
+    version: registry.npmjs.org/lodash@4.17.21
 
 devDependencies:
+  '@types/google-map-react':
+    specifier: ^2.1.7
+    version: registry.npmjs.org/@types/google-map-react@2.1.7
+  '@types/lodash':
+    specifier: ^4.14.195
+    version: registry.npmjs.org/@types/lodash@4.14.195
   '@types/react':
     specifier: ^18.2.7
     version: registry.npmjs.org/@types/react@18.2.7
@@ -4120,6 +4129,14 @@ packages:
     version: 1.0.1
     dev: false
 
+  registry.npmjs.org/@types/google-map-react@2.1.7:
+    resolution: {integrity: sha512-7pquMUU20kVwbfEV91iAWXjApSkqoODkfUwTSmJpU9Tgd+ecX+MrQnplCqrSqKrPF1VjfvyWnDEicdoSd0G5qA==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@types/google-map-react/-/google-map-react-2.1.7.tgz}
+    name: '@types/google-map-react'
+    version: 2.1.7
+    dependencies:
+      '@types/react': registry.npmjs.org/@types/react@18.2.7
+    dev: true
+
   registry.npmjs.org/@types/graceful-fs@4.1.6:
     resolution: {integrity: sha512-Sig0SNORX9fdW+bQuTEovKj3uHcUL6LQKbCrrqb1X7J6/ReAbhCXRAhc+SMejhLELFj2QcyuxmUooZ4bt5ReSw==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@types/graceful-fs/-/graceful-fs-4.1.6.tgz}
     name: '@types/graceful-fs'
@@ -4203,6 +4220,12 @@ packages:
     name: '@types/json-schema'
     version: 7.0.11
     dev: false
+
+  registry.npmjs.org/@types/lodash@4.14.195:
+    resolution: {integrity: sha512-Hwx9EUgdwf2GLarOjQp5ZH8ZmblzcbTBC2wtQWNKARBSxM9ezRIAUpeDTgoQRAFB0+8CNWXVA9+MaSOzOF3nPg==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@types/lodash/-/lodash-4.14.195.tgz}
+    name: '@types/lodash'
+    version: 4.14.195
+    dev: true
 
   registry.npmjs.org/@types/minimist@1.2.2:
     resolution: {integrity: sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@types/minimist/-/minimist-1.2.2.tgz}

@@ -9,6 +9,7 @@ export default defineConfig({
   layout: {
     title: '好室友™平台',
   },
+  favicons: ['http://www.haoshiyou.org/assets/res/icon.png'],
   routes: [
     {
       path: '/',

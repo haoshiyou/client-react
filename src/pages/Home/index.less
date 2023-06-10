@@ -1,7 +1,9 @@
 .container {
-  position: relative;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 .searchContainer {
@@ -16,10 +18,22 @@
   position: relative;
   display: inline-block;
   width: calc(100% - 600px);
+  float: left;
+  height: 100%;
 }
 
 .listContainer {
   position: relative;
   display: inline-block;
   width: 600px;
+  float: left;
+  height: 100%;
+}
+
+.actionContainer {
+  height: 80px;
+}
+
+.contentContainer {
+  height: calc(100vh - 80px);
 }
