@@ -1,6 +1,8 @@
 import { defineConfig } from '@umijs/max';
 
 export default defineConfig({
+  base: '/client-react-io',
+  publicPath: '/client-react-io/',
   antd: {},
   access: {},
   model: {},
@@ -9,7 +11,7 @@ export default defineConfig({
   layout: {
     title: '好室友™平台',
   },
-  favicons: ['http://www.haoshiyou.org/assets/res/icon.png'],
+  favicons: ['https://www.haoshiyou.org/assets/res/icon.png'],
   routes: [
     {
       path: '/',
