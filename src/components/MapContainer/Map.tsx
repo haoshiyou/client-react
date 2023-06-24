@@ -22,7 +22,7 @@ const Map: React.FC<Props> = (props) => {
       lat: 37.52666,
       lng: -122.08106,
     },
-    zoom: 10.7
+    zoom: 10.4
   };
   const markers = listData.map((eachL) => {
     const uid = _get(eachL, 'uid', '');

@@ -96,6 +96,7 @@ const ListItem: React.FC<Props> = (props) => {
       onMouseOver={onListItemMouseover}
       onMouseLeave={onListItemMouseLeave}
       onClick={onClick}
+      list-uid={uid}
       >
       <div className={styles.gridContainer}>
         <div className={styles.title}>

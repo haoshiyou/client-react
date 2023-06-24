@@ -23,10 +23,9 @@ const splitListItems = (listData: ListType[], gap: number) => {
 };
 
 const HomePage: React.FC = () => {
-  const { name } = useModel('global');
   const [loading, setLoading] = useState<boolean>(false);
+  const [cachedData, setCachedData] = useState<ListType[]>([]);
   const [listData, setListData] = useState<ListType[]>([]);
-  const [restData, setRestData] = useState<ListType[]>([]);
   const [mouseoverId, setMouseoverId] = useState<string>('');
   const [mouseClickedId, setMouseClickedId] = useState<string>('');
 
@@ -34,16 +33,25 @@ const HomePage: React.FC = () => {
     setLoading(true);
     fetch(HAOSHIYOU_REQ_URL)
     .then(x => x.json()).then((x) => {
+      setCachedData(splitListItems(x, 0)[1]);
       const [initialListItems, restListItems] = splitListItems(x, 100);
       setListData(initialListItems);
-      setRestData(restListItems);
       setLoading(false);
     });
   }, []); 
-  const onScrollBottom = () => {
-    const [initialListItems, restListItems] = splitListItems(restData, 100);
-    setListData([...listData, ...initialListItems]);
-    setRestData(restListItems);
+  const onScrollBottom = (uid: string) => {
+    const idx = cachedData.findIndex((each: ListType) => each?.uid === uid);
+    let newListItems = [];
+    if (idx) {
+      if (idx > 50) {
+        const startIdx = Math.max(0, idx - 50);
+        const endIdx = Math.min(idx + 50, cachedData.length);
+        newListItems = cachedData.slice(startIdx, endIdx);
+      } else {
+        newListItems = cachedData.slice(0, 100);
+      }
+      setListData(newListItems);
+    }
   };
 
   return (

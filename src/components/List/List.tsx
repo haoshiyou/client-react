@@ -44,13 +44,20 @@ const List: React.FC<Props> = (props) => {
     e.preventDefault();
     setMouseoverId('');
   }
-  const onscrolling = _debounce((e: React.MouseEvent) => {
-    const { clientY, pageY } = e;
+  const onscrolling = _debounce((e: any) => {
+    const { clientY, pageY, target } = e;
     if (scrollListRef.current) {
-      const isBottom = isBottomFn(scrollListRef.current);
-      if (isBottom) {
-        onScrollBottom();
+      const listId = e.target?.parentElement?.parentElement?.getAttribute('list-uid')
+      || e.target?.parentElement?.getAttribute('list-uid') 
+      || e.target?.getAttribute('list-uid');
+      
+      if (listId) {
+        onScrollBottom(listId);
       }
+      // const isBottom = isBottomFn(scrollListRef.current);
+      // if (isBottom) {
+      //   onScrollBottom();
+      // }
     }
   }, 100);
 
