@@ -19,10 +19,10 @@ const Map: React.FC<Props> = (props) => {
   const { loading, listData, mouseoverId, setMouseoverId, mouseClickedId, setMouseClickedId } = props;
   const defaultProps = {
     center: {
-      lat: 37.41666,
-      lng: -122.09106,
+      lat: 37.52666,
+      lng: -122.08106,
     },
-    zoom: 11
+    zoom: 10.7
   };
   const markers = listData.map((eachL) => {
     const uid = _get(eachL, 'uid', '');

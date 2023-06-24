@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Layout, Row, Typography } from 'antd';
 import _get from 'lodash/get';
-import styles from './List.less';
-import ListItem, { Props as listProp } from '../ListItem/ListItem';
+import _debounce from 'lodash/debounce';
+import ListItem from '@/components/ListItem';
+import BackToTop from '@/components/BackToTop';
 import { ListType } from '@/types';
+
+import styles from './List.less';
 
 interface Props {
   name: string;
@@ -13,10 +16,16 @@ interface Props {
   setMouseoverId: Function;
   mouseClickedId: string;
   setMouseClickedId: Function;
+  onScrollBottom: Function;
 }
 
+const isBottomFn = (ele: HTMLDivElement): boolean => {
+  return (ele.scrollHeight - ele.scrollTop) === ele.clientHeight;
+};
+
 const List: React.FC<Props> = (props) => {
-  const { name, loading, listData, mouseoverId, setMouseoverId, mouseClickedId, setMouseClickedId } = props;
+  const { name, loading, listData, mouseoverId, setMouseoverId, mouseClickedId, setMouseClickedId, onScrollBottom } = props;
+  const scrollListRef = useRef<any>();
   const listItems = listData.map((each: ListType) => {
     const uid = _get(each, 'uid', '--');
     return (
@@ -31,17 +40,34 @@ const List: React.FC<Props> = (props) => {
       />
     )
   });
-  const onListLeave = (e: React.MouseEvent)=> {
+  const onListLeave = (e: React.MouseEvent) => {
     e.preventDefault();
     setMouseoverId('');
   }
+  const onscrolling = _debounce((e: React.MouseEvent) => {
+    const { clientY, pageY } = e;
+    if (scrollListRef.current) {
+      const isBottom = isBottomFn(scrollListRef.current);
+      if (isBottom) {
+        onScrollBottom();
+      }
+    }
+  }, 100);
 
   return (
     <div className={styles.container}>
       {loading && <div className={styles.loading}>Loading</div>}
       {!loading && (
-        <div className={styles.listContainer} onMouseLeave={onListLeave}>
+        <div
+          className={styles.listContainer}
+          onMouseLeave={onListLeave}
+          onWheel={onscrolling}
+          ref={scrollListRef}
+          >
           {listItems}
+          <BackToTop 
+            scrollRef={scrollListRef.current}
+           />
         </div>
       )}
     </div>

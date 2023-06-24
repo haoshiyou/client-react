@@ -50,7 +50,6 @@ const getDateDiff = (pre: string, curr = new Date()) => {
   thresholds.some(eachT => {
     surfix = eachT.text;
     prefix = `${Math.floor(diff / eachT.val)}`;
-    // console.log(prefix, surfix, eachT.val, diff);
     if (eachT.val < diff) {
       if (eachT.val === 1000 * 60 * 1) {
         prefix = '';

@@ -12,18 +12,21 @@ import styles from './index.less';
 
 const debugMode = true;
 
-const getFilteredlistItems = (listData: [ListType]) => listData
+const splitListItems = (listData: ListType[], gap: number) => {
+  const sortedData = listData
   .sort((pre: ListType, next: ListType) => {
       const preTime = _get(pre, 'lastUpdated', '');
       const nextTime = _get(next, 'lastUpdated', '');
       return new Date(preTime).getTime() < new Date(nextTime).getTime() ? 1 : -1;
-  })
-  .slice(0, 100);
+  });
+  return [sortedData.slice(0, gap), sortedData.slice(gap)];
+};
 
 const HomePage: React.FC = () => {
   const { name } = useModel('global');
   const [loading, setLoading] = useState<boolean>(false);
   const [listData, setListData] = useState<ListType[]>([]);
+  const [restData, setRestData] = useState<ListType[]>([]);
   const [mouseoverId, setMouseoverId] = useState<string>('');
   const [mouseClickedId, setMouseClickedId] = useState<string>('');
 
@@ -31,11 +34,17 @@ const HomePage: React.FC = () => {
     setLoading(true);
     fetch(HAOSHIYOU_REQ_URL)
     .then(x => x.json()).then((x) => {
-      const filteredList = getFilteredlistItems(x);
-      setListData(filteredList);
-      setLoading(false)
+      const [initialListItems, restListItems] = splitListItems(x, 100);
+      setListData(initialListItems);
+      setRestData(restListItems);
+      setLoading(false);
     });
   }, []); 
+  const onScrollBottom = () => {
+    const [initialListItems, restListItems] = splitListItems(restData, 100);
+    setListData([...listData, ...initialListItems]);
+    setRestData(restListItems);
+  };
 
   return (
     <div className={styles.container}> 
@@ -78,6 +87,7 @@ const HomePage: React.FC = () => {
             setMouseoverId={setMouseoverId}
             mouseClickedId={mouseClickedId}
             setMouseClickedId={setMouseClickedId}
+            onScrollBottom={onScrollBottom}
           />
         </div>
       </div>
