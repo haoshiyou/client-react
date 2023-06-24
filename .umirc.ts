@@ -15,7 +15,8 @@ export default defineConfig({
   routes: [
     {
       path: '/',
-      redirect: '/home',
+      component: './Home',
+      // redirect: '/home',
     },
     {
       name: 'Search',
