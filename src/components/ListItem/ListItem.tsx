@@ -1,6 +1,8 @@
 import { Layout, Row, Typography } from 'antd';
 import React from 'react';
 import _get from 'lodash/get';
+import cls from 'classnames';
+import { priceTranslationFn } from '@/helper';
 import styles from './ListItem.less';
 
 const thresholds = [
@@ -29,9 +31,14 @@ const thresholds = [
     text: '年前',
   },
 ].reverse();
+
 export interface Props {
     list: object;
     uid: string;
+    mouseoverId: string;
+    setMouseoverId: Function;
+    mouseClickedId: string;
+    setMouseClickedId: Function;
 }
 
 const getDateDiff = (pre: string, curr = new Date()) => {
@@ -55,7 +62,7 @@ const getDateDiff = (pre: string, curr = new Date()) => {
 };
 
 const ListItem: React.FC<Props> = (props) => {
-  const { list = {}, uid } = props;
+  const { list = {}, uid, mouseoverId, setMouseoverId, mouseClickedId, setMouseClickedId } = props;
   const name = _get(list, 'name', '--');
   const content = _get(list, 'content', '--');
   const price = _get(list, 'price', '--');
@@ -64,9 +71,33 @@ const ListItem: React.FC<Props> = (props) => {
   const lastUpdated = lastUpdatedTime ? getDateDiff(lastUpdatedTime): '--';
   const imageId = _get(list, 'imageIds[0]', '');
   const imageUrl = imageId ? `http://res.cloudinary.com/xinbenlv/image/upload/c_fill,g_north,w_400,h_300,g_center/${imageId}.jpg`: '';
+  const isMarkerMouseover = uid === mouseoverId;
+  const isMarkerClicked = uid === mouseClickedId;
+  const onListItemMouseover = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setMouseoverId(uid);
+  };
+  const onListItemMouseLeave = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setMouseoverId('');
+  };
+  const onClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setMouseClickedId((prevUid: string)=> {
+        if (prevUid === uid) {
+            return ''
+        }
+        return uid;
+    });
+  };
 
   return (
-    <div className={styles.container}>
+    <div 
+      className={cls(styles.container, (isMarkerMouseover || isMarkerClicked) && styles.onHover)} 
+      onMouseOver={onListItemMouseover}
+      onMouseLeave={onListItemMouseLeave}
+      onClick={onClick}
+      >
       <div className={styles.gridContainer}>
         <div className={styles.title}>
           {content}
@@ -75,7 +106,7 @@ const ListItem: React.FC<Props> = (props) => {
           {addressCity} {lastUpdated}
         </div>
         <div className={styles.pricing}>
-          {`${price ? `$${price}/月`: '价格待议'}`}
+          {priceTranslationFn(price)}
         </div>
       </div>
       <div className={styles.picContainer}>

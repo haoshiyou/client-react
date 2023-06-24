@@ -2,38 +2,45 @@ import React, { useEffect, useState } from 'react';
 import { Layout, Row, Typography } from 'antd';
 import _get from 'lodash/get';
 import styles from './List.less';
-import ListItem, {Props as listProp} from '../ListItem/ListItem';
+import ListItem, { Props as listProp } from '../ListItem/ListItem';
+import { ListType } from '@/types';
 
 interface Props {
   name: string;
   loading: boolean;
-  listData: [listProp];
+  listData: ListType[];
+  mouseoverId: string;
+  setMouseoverId: Function;
+  mouseClickedId: string;
+  setMouseClickedId: Function;
 }
 
 const List: React.FC<Props> = (props) => {
-  const { name, loading, listData } = props;
-  const listItems = listData
-  .sort((pre, next) => {
-      const preTime = _get(pre, 'lastUpdated', '');
-      const nextTime = _get(next, 'lastUpdated', '');
-      return new Date(preTime).getTime() < new Date(nextTime).getTime() ? 1 : -1;
-  })
-  .slice(0, 100)
-  .map((each: listProp)=> {
+  const { name, loading, listData, mouseoverId, setMouseoverId, mouseClickedId, setMouseClickedId } = props;
+  const listItems = listData.map((each: ListType) => {
     const uid = _get(each, 'uid', '--');
     return (
       <ListItem
         list={each}
-        key={uid} uid={uid}   
+        key={uid}
+        uid={uid}
+        mouseoverId={mouseoverId}
+        setMouseoverId={setMouseoverId}
+        mouseClickedId={mouseClickedId}
+        setMouseClickedId={setMouseClickedId}
       />
     )
   });
-  
+  const onListLeave = (e: React.MouseEvent)=> {
+    e.preventDefault();
+    setMouseoverId('');
+  }
+
   return (
     <div className={styles.container}>
       {loading && <div className={styles.loading}>Loading</div>}
       {!loading && (
-        <div className={styles.listContainer}>
+        <div className={styles.listContainer} onMouseLeave={onListLeave}>
           {listItems}
         </div>
       )}
