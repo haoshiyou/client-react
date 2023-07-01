@@ -9,10 +9,10 @@ interface Props {
     lat: number;
     lng: number;
     price: string;
-    mouseoverId: string;
-    setMouseoverId: Function;
-    mouseClickedId: string;
-    setMouseClickedId: Function;
+    mouseoverId?: string;
+    setMouseoverId?: Function;
+    mouseClickedId?: string;
+    setMouseClickedId?: Function;
 }
 
 const MapMarker: React.FC<Props> = (props) => {
@@ -21,15 +21,15 @@ const MapMarker: React.FC<Props> = (props) => {
   const isMarkerClicked = uid === mouseClickedId;
   const onMouseOver = (e: React.MouseEvent) => {
     e.preventDefault();
-    setMouseoverId(uid);
+    if (setMouseoverId) setMouseoverId(uid);
   };
   const onListItemMouseLeave = (e: React.MouseEvent) => {
     e.preventDefault();
-    setMouseoverId('');
+    if (setMouseoverId) setMouseoverId('');
   };
   const onClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    setMouseClickedId((prevUid: string)=> {
+    if (setMouseClickedId) setMouseClickedId((prevUid: string)=> {
         if (prevUid === uid) {
             return ''
         }
