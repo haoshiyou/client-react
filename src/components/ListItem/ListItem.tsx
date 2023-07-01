@@ -46,7 +46,7 @@ const ListItem: React.FC<Props> = (props) => {
   };
   const linkOnclick = (uid: string) => (e: React.MouseEvent) => {
     e.preventDefault();
-    window.location.href = `/client-react-io/home-detail/${uid}`;
+    window.location.href = `/client-react-io/${uid}`;
   };
 
   return (

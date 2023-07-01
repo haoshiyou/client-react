@@ -52,7 +52,6 @@ const HomeInfo: React.FC<Props> = (props) => {
   useEffect(() => {
     setLoading(true);
     fetch(`${HAOSHIYOU_REQ_URL}/${uid}`).then(x => x.json()).then((x) => {
-        console.log(x);
         setDetailObj(x);
         const location_lat = _get(x, 'location_lat', 0);
         const location_lng = _get(x, 'location_lng', 0);

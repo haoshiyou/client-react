@@ -16,7 +16,23 @@ export default defineConfig({
   routes: [
     {
       path: '/',
-      component: './Home',
+      component: './App',
+      hideInMenu: true,
+      // redirect: '/home',
+      // 不展示顶栏
+      headerRender: false,
+      // 不展示页脚
+      footerRender: false,
+      // 不展示菜单
+      menuRender: false,
+      // 不展示菜单顶栏
+      menuHeaderRender: false,
+      // 在面包屑中隐藏
+      hideInBreadcrumb: true,
+    },
+    {
+      path: '/:id',
+      component: './App',
       hideInMenu: true,
       // redirect: '/home',
       // 不展示顶栏
