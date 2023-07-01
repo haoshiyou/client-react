@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useMatch } from 'umi';
+import { useLocation } from 'umi';
 import HomeInfo from '@/components/HomeInfo';
 
 import styles from './index.less';
 
 
 const HomePage: React.FC = () => {
-    const match = useMatch('/:id');
-    const uid = match?.params?.id || '';
+    const { search } = useLocation();
+    const searchParams = new URLSearchParams(search);
+    const uid = searchParams.get('id') || '';
 
     return (
         <div className={styles.container}>
