@@ -3,7 +3,6 @@ import MapContainer from '@/components/MapContainer';
 import List from '@/components/List';
 import Search from '@/components/Search';
 import Filter from '@/components/Filter';
-import { useModel } from '@umijs/max';
 import { ListType } from '@/types';
 import { HAOSHIYOU_REQ_URL } from '@/constants';
 import _get from 'lodash/get';
