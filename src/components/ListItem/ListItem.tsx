@@ -2,35 +2,9 @@ import { Layout, Row, Typography } from 'antd';
 import React from 'react';
 import _get from 'lodash/get';
 import cls from 'classnames';
-import { priceTranslationFn } from '@/helper';
+import { priceTranslationFn, getDateDiff } from '@/helper';
+import { ExportOutlined } from '@ant-design/icons';
 import styles from './ListItem.less';
-
-const thresholds = [
-  {
-    val: 1000 * 60 * 1,
-    text: '刚刚',
-  },
-  {
-    val: 1000 * 60 * 60,
-    text: '分钟前',
-  },
-  {
-    val: 1000 * 60 * 60 * 24,
-    text: '小时前',
-  },
-  {
-    val: 1000 * 60 * 60 * 24 * 30,
-    text: '天前',
-  },
-  {
-    val: 1000 * 60 * 60 * 24 * 365,
-    text: '个月前',
-  },
-  {
-    val: 1000 * 60 * 60 * 24 * 365,
-    text: '年前',
-  },
-].reverse();
 
 export interface Props {
     list: object;
@@ -40,25 +14,6 @@ export interface Props {
     mouseClickedId: string;
     setMouseClickedId: Function;
 }
-
-const getDateDiff = (pre: string, curr = new Date()) => {
-  const preTime = new Date(pre).getTime();
-  const currTime = new Date(curr).getTime();
-  const diff = currTime - preTime;
-  let surfix = '';
-  let prefix = '';
-  thresholds.some(eachT => {
-    surfix = eachT.text;
-    prefix = `${Math.floor(diff / eachT.val)}`;
-    if (eachT.val < diff) {
-      if (eachT.val === 1000 * 60 * 1) {
-        prefix = '';
-      }
-      return true;
-    }
-  });
-  return `${prefix} ${surfix}`;
-};
 
 const ListItem: React.FC<Props> = (props) => {
   const { list = {}, uid, mouseoverId, setMouseoverId, mouseClickedId, setMouseClickedId } = props;
@@ -89,6 +44,10 @@ const ListItem: React.FC<Props> = (props) => {
         return uid;
     });
   };
+  const linkOnclick = (uid: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.location.href = `/client-react-io/home-detail/${uid}`;
+  };
 
   return (
     <div 
@@ -105,8 +64,14 @@ const ListItem: React.FC<Props> = (props) => {
         <div className={styles.locationAndDate}>
           {addressCity} {lastUpdated}
         </div>
-        <div className={styles.pricing}>
-          {priceTranslationFn(price)}
+        <div className={styles.pricingAndLink}>
+          <div className={styles.pricing}>
+            {priceTranslationFn(price)}
+          </div>
+          <div className={styles.hLink}>
+          
+          <ExportOutlined onClick={linkOnclick(uid)} />
+          </div>
         </div>
       </div>
       <div className={styles.picContainer}>

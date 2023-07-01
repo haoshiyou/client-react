@@ -1,0 +1,159 @@
+.container {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding-left: calc((100vw - 1400px) / 2);
+    padding-right: calc((100vw - 1400px) / 2);
+}
+
+.navBar {
+    display: flex; 
+    height: 50px;
+    width: 1400px;
+    position: fixed;
+    z-index: 10000;
+    background-color: #ffffff;
+    padding-left: 16px;
+    font-size: 16px;
+    font-weight: 500;
+    border-bottom: 0.3px solid lightgrey;
+    &:hover {
+        color: #21b3fe;
+        cursor: pointer;
+    }
+}
+
+.content {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    overflow-y: auto;
+    background-color: #ffffff;
+    border-left: 0.3px solid lightgrey;
+    border-right: 0.3px solid lightgrey;
+}
+
+.image {
+    height: 250px;
+    padding: 30px 20px;
+    overflow-y: auto;
+}
+
+.title{
+    height: 50px;
+    padding: 20px;
+    font-size: 24px;
+    font-weight: 500;
+    color: #4d4d4d;
+    margin: 10px 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.subTitle {
+    display: flex;
+    height: 35px;
+    font-size: 12px;
+    color: #a5a5a5;
+    line-height: 16px;
+    padding: 12px 16px 26px 22px;
+}
+
+.map {
+    display: flex;
+    height: 400px;
+    padding: 30px 20px;
+}
+
+.description {
+    position: relative;
+    padding: 20px;
+    .descTitle {
+        padding: 25px 0;
+        font-size: 18px;
+        font-weight: 400;
+        color: #4d4d4d;
+    }
+    .descContent {
+        padding: 15px 0;
+        font-size: 14px;
+        font-weight: 400;
+        color: #4d4d4d;
+        .contentItem {
+            padding: 15px 0;
+        }
+    }
+}
+
+.amenity {
+    position: relative;
+    padding: 20px;
+    .amenityTitle {
+        padding: 25px 0;
+        font-size: 18px;
+        font-weight: 400;
+        color: #4d4d4d;
+    }
+    .amenityItem {
+        padding-left: 20px;
+        height: 30px;
+        .amenityItemIcon {
+            padding: 0 15px;
+            color: darkcyan;
+            font-size: 16px;
+            font-weight: 500;
+        }
+    }
+}
+
+.contact {
+    position: relative;
+    padding: 20px;
+    .contactTitle {
+        padding: 25px 0;
+        font-size: 18px;
+        font-weight: 400;
+        color: #4d4d4d;
+    }
+    .contactItem {
+        padding-left: 20px;
+        height: 30px;
+        .contactItemIcon {
+            padding: 0 15px;
+        }
+    }
+}
+
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    height: 50px;
+    width: 1400px;
+    z-index: 10000;
+    background-color: #ffffff;
+    border: 0.3px solid lightgrey;
+    .price {
+        display: inline-block;
+        font-size: 18px;
+        font-weight: 500;
+        text-align: center;
+        width: 50%;
+        max-width: calc(100vw / 2);
+        padding-top: 15px;
+        height: 50px;
+    }
+    .contactOwner {
+        display: inline-block;
+        width: 50%;
+        max-width: calc(100vw / 2);
+        font-size: 16px;
+        text-align: center;
+        background-color: #21b3fe;
+        color: #ffffff;
+        padding-top: 15px;
+        height: 50px;
+    }
+}
