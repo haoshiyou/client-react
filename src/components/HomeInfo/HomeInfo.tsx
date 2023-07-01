@@ -47,7 +47,7 @@ const HomeInfo: React.FC<Props> = (props) => {
   const contactName = _get(detailObj, 'owner.name', '--');
   const contactEmail = _get(detailObj, 'owner.contactEmail', '--');
   const contactPhone = _get(detailObj, 'owner.contactPhone', '--');
-  const imageUrlMapping = (imageId: string) => `http://res.cloudinary.com/xinbenlv/image/upload/c_fill,g_north,w_400,h_300,g_center/${imageId}.jpg` || '';
+  const imageUrlMapping = (imageId: string) => `http://res.cloudinary.com/xinbenlv/image/upload/c_fill/${imageId}.jpg` || '';
 
   useEffect(() => {
     setLoading(true);
