@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import Home from '@/pages/Home';
 import HomeDetail from '@/pages/HomeDetail';
-import { useMatch } from 'umi';
+import { useLocation } from 'umi';
 
 import styles from './index.less';
 
 const App: React.FC = () => {
-    const [currentRoute, setCurrentRoute] = useState<string>('');
-    const match = useMatch('/:id');
-    const uid = match?.params?.id || '';
+    const { search } = useLocation();
+    const searchParams = new URLSearchParams(search);
+    const uid = searchParams.get('id') || '';
 
     return (
         <div>
