@@ -41,7 +41,7 @@ const HomeInfo: React.FC<Props> = (props) => {
   const location_lng = _get(detailObj, 'location_lng', 0);
   const price = _get(detailObj, 'price', '');
   const content = _get(detailObj, 'content', '');
-  const contentList = content.split('\n\n');
+  const contentList = content.split('\n');
   const amenityArray = _get(detailObj, 'amenityArray', []).join(',  ');
   const wechatId = _get(detailObj, 'wechatId', '--') || '--';
   const contactName = _get(detailObj, 'owner.name', '--');
